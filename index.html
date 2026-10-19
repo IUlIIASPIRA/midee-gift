@@ -2,48 +2,715 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Julie Spira · midee</title>
-<meta name="description" content="Ableton Templates Library inspired by real tracks from the dancefloor">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your gift for Ableton Live · midee</title>
+<meta name="description" content="Free Ableton projects from midee, a library of 7,000+ Racks with full settings inside. From Julie Spira, founder of midee, at ADE Amsterdam.">
+<meta name="theme-color" content="#151517">
+<meta property="og:title" content="Your gift for Ableton Live · midee">
+<meta property="og:description" content="Open Ableton with a sound you already love. Free Ableton projects from midee.">
+<meta property="og:url" content="https://gift.midee.me/">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23151517'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23c4b5fd' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preload" href="assets/DMSans-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  :root { --bg: #151517; --text: #edecec; --muted: #edecec99; --lavender: #c4b5fd; --line: #edecec26; }
+  @font-face {
+    font-family: "DM Sans";
+    src: url("assets/DMSans-var-latin.woff2") format("woff2");
+    font-weight: 100 1000;
+    font-style: normal;
+    font-display: swap;
+  }
+  :root {
+    --bg: #151517;
+    --island: #1c1b22;
+    --badge: #262430;
+    --text: #edecec;
+    --text-85: #edececd9;
+    --muted: #edecec99;
+    --faint: #edecec73;
+    --line: #edecec1f;
+    --line-strong: #edecec33;
+    --lav: #c4b5fd;
+    --lav-soft: #c4b5fd1a;
+    --radius: 16px;
+    --pad: 22px;
+    --wordmark: "Futura", "Futura PT", "DM Sans", system-ui, sans-serif;
+  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: "DM Sans", system-ui, sans-serif; letter-spacing: -.2px; min-height: 100vh; display: flex; justify-content: center; }
-  main { width: 100%; max-width: 440px; padding: 56px 24px 40px; display: flex; flex-direction: column; gap: 28px; }
-  .brand { color: var(--lavender); font-weight: 600; font-size: 22px; letter-spacing: -.5px; }
-  .what { color: var(--muted); font-size: 17px; line-height: 1.4; margin-top: 8px; }
-  h1 { font-size: 40px; font-weight: 500; letter-spacing: -1.4px; line-height: 1.05; }
-  .role { color: var(--lavender); font-size: 17px; margin-bottom: 4px; }
-  .hook { color: var(--lavender); font-size: 17px; line-height: 1.4; }
-  nav { display: flex; flex-direction: column; gap: 12px; }
-  a.btn { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border: 1px solid var(--line); border-radius: 14px; color: var(--text); text-decoration: none; font-size: 17px; transition: border-color .15s, background .15s; }
-  a.btn small { color: var(--muted); font-size: 15px; }
-  a.btn:hover, a.btn:focus-visible { border-color: var(--lavender); background: #c4b5fd14; outline: none; }
-  a.btn.main { background: var(--lavender); color: var(--bg); border-color: var(--lavender); font-weight: 500; }
-  a.btn.main small { color: #151517b3; }
-  footer { color: var(--muted); font-size: 15px; margin-top: auto; }
-  footer a { color: var(--muted); }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+    font-size: 17px; line-height: 1.5; letter-spacing: -.2px;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  img, video { display: block; max-width: 100%; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--lav); outline-offset: 3px; border-radius: 6px; }
+
+  .wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 var(--pad); }
+  section { padding: 72px 0 0; }
+  .label { font-size: 12px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--lav); margin-bottom: 14px; }
+  h1, h2, h3 { text-wrap: balance; }
+  h2 { font-size: 30px; font-weight: 500; letter-spacing: -.8px; line-height: 1.15; }
+  h3 { font-size: 19px; font-weight: 600; letter-spacing: -.4px; line-height: 1.3; }
+  .lead { color: var(--muted); margin-top: 12px; max-width: 34em; }
+  .muted { color: var(--muted); }
+  .small { font-size: 14px; }
+  .faint { color: var(--faint); }
+
+  /* buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: 54px; padding: 14px 22px; border-radius: 14px;
+    border: 1px solid var(--line-strong); text-decoration: none; font-size: 17px; font-weight: 500;
+    transition: border-color .15s, background .15s, color .15s;
+    text-align: center;
+  }
+  .btn:hover { border-color: var(--lav); background: var(--lav-soft); }
+  .btn--main { background: var(--lav); color: var(--bg); border-color: var(--lav); }
+  .btn--main:hover { background: #d4c8fe; border-color: #d4c8fe; }
+  .btn[aria-disabled="true"] { opacity: .45; pointer-events: none; border-style: dashed; }
+  .btn small { font-size: 14px; font-weight: 400; opacity: .7; }
+  .btns { display: flex; flex-direction: column; gap: 10px; margin-top: 26px; }
+  .link { color: var(--lav); text-decoration: none; border-bottom: 1px solid #c4b5fd55; padding-bottom: 1px; }
+  .link:hover { border-bottom-color: var(--lav); }
+
+  /* top bar */
+  .top { display: flex; justify-content: space-between; align-items: baseline; padding-top: 26px; }
+  .wordmark { font-family: var(--wordmark); font-weight: 500; font-size: 24px; letter-spacing: -.3px; color: var(--lav); text-decoration: none; line-height: 1; }
+  .top .when { font-size: 14px; color: var(--muted); }
+
+  /* hero */
+  .hero { padding: 64px 0 8px; }
+  .hero h1 { font-size: 44px; font-weight: 500; letter-spacing: -1.6px; line-height: 1.04; max-width: 10em; }
+  .hero .hook { color: var(--lav); font-size: 19px; margin-top: 18px; max-width: 22em; }
+  .hero .racks { color: var(--muted); margin-top: 28px; font-size: 15px; max-width: 24em; }
+  .hero .racks b { color: var(--text); font-weight: 500; }
+  .hero .btns { max-width: 380px; }
+
+  /* role chooser */
+  .chooser-q { font-size: 15px; color: var(--muted); margin-bottom: 12px; }
+  .seg {
+    display: grid; grid-template-columns: 1fr; gap: 8px;
+  }
+  .seg button {
+    text-align: left; padding: 15px 18px; border-radius: 14px;
+    border: 1px solid var(--line-strong); font-size: 17px; font-weight: 500;
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    transition: border-color .15s, background .15s;
+  }
+  .seg button::after { content: ""; width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--faint); flex: none; }
+  .seg button:hover { border-color: var(--lav); }
+  .seg button[aria-pressed="true"] { border-color: var(--lav); background: var(--lav-soft); }
+  .seg button[aria-pressed="true"]::after { border-color: var(--lav); background: radial-gradient(circle, var(--lav) 0 4px, transparent 5px); }
+
+  .role-panel { margin-top: 22px; padding: 26px var(--pad) 24px; background: var(--island); border-radius: var(--radius); }
+  .role-panel h3 { font-size: 24px; font-weight: 500; letter-spacing: -.6px; }
+  .role-panel .problem { color: var(--muted); margin-top: 12px; }
+  .role-panel .answer { margin-top: 12px; color: var(--text-85); }
+  .ticks { list-style: none; margin-top: 18px; display: grid; gap: 10px; }
+  .ticks li { position: relative; padding-left: 26px; color: var(--text-85); }
+  .ticks li::before { content: ""; position: absolute; left: 2px; top: .55em; width: 9px; height: 9px; border-radius: 50%; background: var(--lav); }
+  .role-panel .btns { margin-top: 24px; }
+  .role-panel[data-fading] { opacity: .3; }
+  .role-panel { transition: opacity .18s; }
+
+  /* projects */
+  .picker { margin-top: 26px; }
+  .chips { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x proximity; scroll-padding-inline: var(--pad); padding: 2px var(--pad) 10px; margin: 0 calc(var(--pad) * -1); scrollbar-width: none; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip {
+    flex: none; scroll-snap-align: start; padding: 10px 16px; border-radius: 999px;
+    border: 1px solid var(--line-strong); font-size: 15px; white-space: nowrap;
+    transition: border-color .15s, background .15s, color .15s;
+  }
+  .chip:hover { border-color: var(--lav); }
+  .chip[aria-selected="true"] { background: var(--lav); color: var(--bg); border-color: var(--lav); font-weight: 500; }
+  .chip .soon { color: var(--faint); font-size: 13px; margin-left: 6px; }
+  .chip[aria-selected="true"] .soon { color: #15151799; }
+
+  .project { margin-top: 12px; padding: 26px var(--pad) 24px; background: var(--island); border-radius: var(--radius); min-height: 300px; }
+  .project .style { font-size: 12px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--lav); }
+  .project h3 { font-size: 30px; font-weight: 500; letter-spacing: -.8px; margin-top: 8px; line-height: 1.1; }
+  .project .tech { margin-top: 12px; color: var(--text-85); }
+  .project dl { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .project dt { font-size: 12px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--faint); }
+  .project dd { color: var(--muted); margin-top: 4px; font-size: 15px; }
+  .project .opens { margin-top: 14px; font-size: 14px; color: var(--faint); }
+  .project .send { font-size: 15px; color: var(--muted); margin-top: 4px; min-height: 44px; display: inline-flex; align-items: center; gap: 8px; }
+  .project .send:hover { color: var(--lav); }
+  .suite { margin-top: 16px; font-size: 14px; color: var(--faint); }
+  .suite b { font-weight: 500; color: var(--muted); }
+
+  /* what is midee */
+  .pillars { display: grid; gap: 10px; margin-top: 28px; }
+  .pillar { padding: 22px var(--pad); border: 1px solid var(--line); border-radius: var(--radius); }
+  .pillar .n { font-size: 13px; color: var(--lav); font-weight: 500; }
+  .pillar h3 { margin-top: 6px; }
+  .pillar p { color: var(--muted); margin-top: 8px; font-size: 15px; }
+  .facts { margin-top: 18px; display: grid; gap: 6px; font-size: 15px; color: var(--muted); }
+  .facts b { color: var(--text); font-weight: 500; }
+
+  .steps { display: grid; gap: 14px; margin-top: 34px; }
+  .step figure { border-radius: 12px; overflow: hidden; background: var(--island); aspect-ratio: 560 / 316; }
+  .step video, .step img { width: 100%; height: 100%; object-fit: cover; }
+  .step figcaption { font-size: 15px; color: var(--muted); margin-top: 8px; }
+  .step figcaption b { color: var(--text); font-weight: 500; }
+
+  .video { margin-top: 34px; }
+  .yt { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; background: #000; }
+  .yt img { width: 100%; height: 100%; object-fit: cover; opacity: .72; transition: opacity .2s; }
+  .yt:hover img { opacity: .9; }
+  .yt .play { position: absolute; inset: 0; display: grid; place-items: center; }
+  .yt .play span { width: 68px; height: 68px; border-radius: 50%; background: var(--lav); display: grid; place-items: center; box-shadow: 0 10px 40px #0008; }
+  .yt .play svg { margin-left: 4px; }
+  .yt iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .video p { margin-top: 10px; font-size: 15px; color: var(--muted); }
+  .browser-cta { margin-top: 30px; }
+
+  /* reviews */
+  .reviews { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 26px calc(var(--pad) * -1) 0; padding: 0 var(--pad) 12px; scrollbar-width: none; }
+  .reviews::-webkit-scrollbar { display: none; }
+  .reviews figure { flex: 0 0 84%; max-width: 380px; scroll-snap-align: center; align-self: flex-start; }
+  .reviews img { width: 100%; height: auto; border-radius: 18px; }
+  .swipe-hint { font-size: 14px; color: var(--faint); margin-top: 6px; }
+
+  /* club */
+  .club { display: grid; gap: 22px; padding: 28px var(--pad); border: 1px solid var(--line-strong); border-radius: 20px; background: linear-gradient(160deg, #1f1c2b 0%, var(--bg) 70%); overflow: hidden; }
+  .club .beta { display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--bg); background: var(--lav); padding: 3px 8px; border-radius: 6px; vertical-align: 3px; margin-left: 8px; }
+  .club p { color: var(--muted); margin-top: 12px; }
+  .club svg { width: 100%; max-width: 200px; height: auto; opacity: .9; }
+
+  /* footer */
+  footer { padding: 88px 0 calc(48px + env(safe-area-inset-bottom)); }
+  .me { display: flex; align-items: center; gap: 16px; }
+  .me img { width: 72px; height: 72px; border-radius: 50%; }
+  .me .role { color: var(--lav); font-size: 15px; }
+  .me .name { font-family: var(--wordmark); font-weight: 500; font-size: 30px; letter-spacing: -.5px; line-height: 1.1; }
+  .ade { margin-top: 26px; font-size: 19px; }
+  .contacts { list-style: none; margin-top: 26px; border-top: 1px solid var(--line); }
+  .contacts li { border-bottom: 1px solid var(--line); }
+  .contacts a { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 15px 0; text-decoration: none; min-height: 54px; }
+  .contacts a span:last-child { color: var(--muted); font-size: 15px; text-align: right; }
+  .contacts a:hover span:first-child { color: var(--lav); }
+  .fine { margin-top: 30px; font-size: 13px; color: var(--faint); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+  /* tablet / desktop */
+  @media (min-width: 720px) {
+    :root { --pad: 32px; }
+    section { padding-top: 112px; }
+    h2 { font-size: 40px; letter-spacing: -1.2px; }
+    .hero { padding: 120px 0 0; }
+    .hero h1 { font-size: 76px; letter-spacing: -3px; }
+    .hero .hook { font-size: 24px; }
+    .btns { flex-direction: row; flex-wrap: wrap; }
+    .hero .btns { max-width: none; }
+    .seg { grid-template-columns: repeat(3, 1fr); }
+    .role-panel { padding: 36px 40px; }
+    .role-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; }
+    .role-panel .ticks { margin-top: 0; }
+    .pillars { grid-template-columns: repeat(3, 1fr); }
+    .steps { grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .reviews { margin: 30px 0 0; padding: 0; display: block; columns: 2; column-gap: 16px; overflow: visible; }
+    .reviews figure { max-width: none; break-inside: avoid; margin-bottom: 16px; }
+    .swipe-hint { display: none; }
+    .club { grid-template-columns: 1.2fr 1fr; align-items: center; padding: 44px; }
+    .club svg { justify-self: end; max-width: 300px; }
+    .picker { display: grid; grid-template-columns: 300px 1fr; gap: 20px; align-items: start; }
+    .chips { flex-direction: column; overflow: visible; margin: 0; padding: 0; gap: 6px; }
+    .chip { text-align: left; border-radius: 12px; padding: 12px 16px; white-space: normal; }
+    .project { margin-top: 0; padding: 36px 40px; }
+    .project h3 { font-size: 40px; }
+    .video { max-width: 820px; }
+    .contacts { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
+  }
+  @media (min-width: 720px) and (hover: hover) and (pointer: fine) {
+    .project .send { display: none; }
+  }
+  @media (min-width: 1040px) {
+    .reviews { columns: 3; }
+    .steps { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  }
 </style>
 </head>
 <body>
-<main>
-  <div>
-    <div class="brand">midee</div>
-    <p class="what">Ableton Templates Library inspired by real tracks from the dancefloor</p>
+
+<div class="wrap">
+  <header class="top">
+    <a class="wordmark" href="#" data-midee="https://midee.me/" aria-label="midee home">midee</a>
+    <span class="when">ADE Amsterdam · 22–25 Oct</span>
+  </header>
+
+  <!-- 1. Hero -->
+  <div class="hero">
+    <h1>Your gift for Ableton Live</h1>
+    <p class="hook">Open Ableton with a sound you already love.</p>
+    <div class="btns">
+      <a class="btn btn--main" href="#take" data-scroll="take">Take your free project ↓</a>
+      <a class="btn" href="#" data-midee="https://midee.me/p/default">Try the library in your browser</a>
+    </div>
+    <p class="racks"><b>7,000+ Racks</b> with full settings inside, as a plugin and in your browser.</p>
   </div>
-  <div>
-    <div class="role">Founder</div>
-    <h1>Julie Spira</h1>
-  </div>
-  <p class="hook">open ableton first with a sound you already love</p>
-  <nav>
-    <a class="btn main" href="https://midee.me/">midee.me <small>7,000+ Racks</small></a>
-    <a class="btn" href="https://instagram.com/spiraaaaaa">Instagram <small>@spiraaaaaa</small></a>
-    <a class="btn" href="mailto:js@midee.me">Email <small>js@midee.me</small></a>
-  </nav>
-  <footer>© midee</footer>
-</main>
+
+  <!-- 2. Who are you -->
+  <section id="who" aria-labelledby="who-h">
+    <p class="label" id="who-h">Who are you?</p>
+    <div class="seg" role="group" aria-label="Who are you?">
+      <button type="button" data-role="school" aria-pressed="false">I run a school</button>
+      <button type="button" data-role="teacher" aria-pressed="false">I teach Ableton 1-on-1</button>
+      <button type="button" data-role="producer" aria-pressed="false">I make music</button>
+    </div>
+    <div class="role-panel" id="rolePanel" aria-live="polite"></div>
+  </section>
+
+  <!-- 3. Projects -->
+  <section id="take" aria-labelledby="take-h">
+    <p class="label">Your gift</p>
+    <h2 id="take-h">Take your project</h2>
+    <p class="lead">Free Ableton projects with MIDI and Racks. Open one in Ableton, take it apart, and use it in your own track.</p>
+    <div class="picker">
+      <div class="chips" id="chips" role="tablist" aria-label="Free projects"></div>
+      <article class="project" id="project" role="tabpanel" aria-live="polite"></article>
+    </div>
+    <p class="suite"><b>Made for Ableton Live&nbsp;12 Suite.</b> Many Racks use instruments that come with Suite.</p>
+  </section>
+
+  <!-- 4. What is midee -->
+  <section id="what" aria-labelledby="what-h">
+    <p class="label">What is midee</p>
+    <h2 id="what-h">A library of Ableton Racks and MIDI, built from tracks we love</h2>
+    <p class="lead">7,000+ Racks and MIDI with full settings inside. They work as a plugin inside Ableton and in your browser.</p>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="n">01</div>
+        <h3>Break down tracks you love</h3>
+        <p>We take apart the techniques of techno tracks producers love. You see production in action, with every setting open.</p>
+      </div>
+      <div class="pillar">
+        <div class="n">02</div>
+        <h3>Make your own</h3>
+        <p>Then we make our own sounds with those techniques. Change the notes and the settings, and build your track from there.</p>
+      </div>
+      <div class="pillar">
+        <div class="n">03</div>
+        <h3>Grow the library together</h3>
+        <p>We explore new trends and the established canons. The library grows from what the community picks.</p>
+      </div>
+    </div>
+    <div class="facts">
+      <div><b>Any BPM, any key.</b> Sounds follow your project tempo, and you can transpose them in the plugin.</div>
+      <div><b>Almost 3,000 people</b> use midee.</div>
+    </div>
+
+    <div class="steps">
+      <div class="step"><figure><video muted loop playsinline preload="none" poster="assets/step1-install.webp" aria-label="Installing the midee plugin"><source src="assets/step1-install.webm" type="video/webm"><source src="assets/step1-install.mp4" type="video/mp4"></video></figure><figcaption><b>1.</b> Install the plugin</figcaption></div>
+      <div class="step"><figure><video muted loop playsinline preload="none" poster="assets/step2-rescan.webp" aria-label="Rescanning plug-ins in Ableton"><source src="assets/step2-rescan.webm" type="video/webm"><source src="assets/step2-rescan.mp4" type="video/mp4"></video></figure><figcaption><b>2.</b> Rescan plug-ins in Ableton</figcaption></div>
+      <div class="step"><figure><video muted loop playsinline preload="none" poster="assets/step3-open.webp" aria-label="Opening midee inside Ableton"><source src="assets/step3-open.webm" type="video/webm"><source src="assets/step3-open.mp4" type="video/mp4"></video></figure><figcaption><b>3.</b> Open midee</figcaption></div>
+      <div class="step"><figure><video muted loop playsinline preload="none" poster="assets/step4-drag.webp" aria-label="Dragging a sound onto an empty MIDI track"><source src="assets/step4-drag.webm" type="video/webm"><source src="assets/step4-drag.mp4" type="video/mp4"></video></figure><figcaption><b>4.</b> Drag a sound onto an empty MIDI track</figcaption></div>
+    </div>
+
+    <div class="video">
+      <button class="yt" id="yt" type="button" aria-label="Play the video: how to use the midee plugin">
+        <img src="assets/video-poster.webp" alt="" loading="lazy" decoding="async" width="820" height="461">
+        <span class="play"><span><svg width="22" height="24" viewBox="0 0 22 24" aria-hidden="true"><path d="M0 0 L22 12 L0 24 Z" fill="#151517"/></svg></span></span>
+      </button>
+      <p>How to use the midee plugin in Ableton.</p>
+    </div>
+
+    <div class="browser-cta">
+      <a class="btn" href="#" data-midee="https://midee.me/p/default">Try the full library in your browser →</a>
+    </div>
+  </section>
+
+  <!-- 5. Reviews -->
+  <section id="say" aria-labelledby="say-h">
+    <p class="label">What people say</p>
+    <h2 id="say-h">Messages producers sent me</h2>
+    <div class="reviews">
+      <figure><img src="assets/review-full-track.webp" width="640" height="222" decoding="async" alt="“i took a look at midee and made a full track with it. i'm amazed by the high quality!!”"></figure>
+      <figure><img src="assets/review-racks-wow.webp" width="640" height="275" decoding="async" alt="“Hi spira, First of all wow and thank you for the racks, love them already. Definitely that I will use it. There are sound amazing, and of course I will share the results.”"></figure>
+      <figure><img src="assets/review-plugin-great.webp" width="640" height="212" decoding="async" alt="“Hi, I'm sending you this message to thank you for your plugin, it's really great. I really enjoyed the sounds and presets you created! Great work!”"></figure>
+      <figure><img src="assets/review-party.webp" width="640" height="154" decoding="async" alt="“Hiiiii. Today I'll play at a party and plan to blast some unreleased made with mideee. Mind to listen?”"></figure>
+      <figure><img src="assets/review-production-upgrade.webp" width="640" height="136" decoding="async" alt="“Thanks you so much! My production upgrade directly with your tools”"></figure>
+    </div>
+    <p class="swipe-hint">Swipe →</p>
+  </section>
+
+  <!-- 6. Club -->
+  <section id="club" aria-labelledby="club-h">
+    <div class="club">
+      <div>
+        <p class="label">For beginners</p>
+        <h2 id="club-h">Build your first track in a club <span class="beta">Beta</span></h2>
+        <p>A virtual club where you build a techno track part by part. You hear each part land on the dancefloor, then take the track home as an Ableton project.</p>
+        <div class="btns"><a class="btn btn--main" href="#" data-midee="https://firstproduction.midee.me/">Enter the club →</a></div>
+      </div>
+      <svg viewBox="0 0 222 141" aria-hidden="true"><rect x="1" y="1" width="220" height="139" rx="6" fill="none" stroke="#edecec40" stroke-width="2"/><rect x="0" y="0" width="222" height="24" rx="6" fill="#edecec33"/><rect x="0" y="12" width="222" height="12" fill="#edecec33"/><path d="M9 8 L17 8 L13 15 Z" fill="#edecec66"/><circle cx="28" cy="12" r="4" fill="#c4b5fd"/><rect x="40" y="10" width="64" height="4" rx="2" fill="#edecec66"/><circle cx="33" cy="58" r="14" fill="none" stroke="#edecec40" stroke-width="2"/><line x1="33" y1="58" x2="26.5" y2="50.4" stroke="#edecec66" stroke-width="3" stroke-linecap="round"/><rect x="20" y="77" width="26" height="4" rx="2" fill="#edecec33"/><circle cx="85" cy="58" r="14" fill="none" stroke="#edecec40" stroke-width="2"/><line x1="85" y1="58" x2="94.9" y2="56.4" stroke="#c4b5fd" stroke-width="3" stroke-linecap="round"/><rect x="72" y="77" width="26" height="4" rx="2" fill="#edecec33"/><circle cx="137" cy="58" r="14" fill="none" stroke="#edecec40" stroke-width="2"/><line x1="137" y1="58" x2="137.0" y2="48.0" stroke="#edecec66" stroke-width="3" stroke-linecap="round"/><rect x="124" y="77" width="26" height="4" rx="2" fill="#edecec33"/><circle cx="189" cy="58" r="14" fill="none" stroke="#edecec40" stroke-width="2"/><line x1="189" y1="58" x2="179.1" y2="56.4" stroke="#edecec66" stroke-width="3" stroke-linecap="round"/><rect x="176" y="77" width="26" height="4" rx="2" fill="#edecec33"/><circle cx="33" cy="106" r="14" fill="none" stroke="#edecec40" stroke-width="2"/><line x1="33" y1="106" x2="39.5" y2="98.4" stroke="#edecec66" stroke-width="3" stroke-linecap="round"/><rect x="20" y="125" width="26" height="4" rx="2" fill="#edecec33"/><circle cx="85" cy="106" r="14" fill="none" stroke="#edecec40" stroke-width="2"/><line x1="85" y1="106" x2="82.7" y2="96.3" stroke="#edecec66" stroke-width="3" stroke-linecap="round"/><rect x="72" y="125" width="26" height="4" rx="2" fill="#edecec33"/><circle cx="137" cy="106" r="14" fill="none" stroke="#edecec40" stroke-width="2"/><line x1="137" y1="106" x2="146.5" y2="109.1" stroke="#edecec66" stroke-width="3" stroke-linecap="round"/><rect x="124" y="125" width="26" height="4" rx="2" fill="#edecec33"/><circle cx="189" cy="106" r="14" fill="none" stroke="#edecec40" stroke-width="2"/><line x1="189" y1="106" x2="180.9" y2="100.1" stroke="#edecec66" stroke-width="3" stroke-linecap="round"/><rect x="176" y="125" width="26" height="4" rx="2" fill="#edecec33"/></svg>
+    </div>
+  </section>
+
+  <!-- 7. Footer -->
+  <footer aria-label="Contacts">
+    <div class="me">
+      <img src="assets/julie.webp" width="72" height="72" alt="Julie Spira" loading="lazy" decoding="async">
+      <div>
+        <div class="role">Founder, midee</div>
+        <div class="name">Julie Spira</div>
+      </div>
+    </div>
+    <p class="ade">At ADE Amsterdam 22–25 Oct 2026. Say hi <span aria-hidden="true">👉🏻👈🏻</span></p>
+    <ul class="contacts">
+      <li><a href="https://wa.me/34607414417" target="_blank" rel="noopener"><span>WhatsApp</span><span>+34 607 414 417</span></a></li>
+      <li><a href="https://t.me/+34607414417" target="_blank" rel="noopener"><span>Telegram</span><span>+34 607 414 417</span></a></li>
+      <li><a href="mailto:js@midee.me"><span>Email</span><span>js@midee.me</span></a></li>
+      <li><a href="https://instagram.com/spiraaaaaa" target="_blank" rel="noopener"><span>Instagram</span><span>@spiraaaaaa</span></a></li>
+      <li><a href="https://youtube.com/@midee_me" target="_blank" rel="noopener"><span>YouTube</span><span>@midee_me</span></a></li>
+      <li><a href="https://t.me/Ableton_trainer_bot" target="_blank" rel="noopener"><span>Ableton Trainer bot</span><span>Telegram</span></a></li>
+      <li><a href="#" data-midee="https://midee.me/" target="_blank" rel="noopener"><span>midee.me</span><span>Library and plugin</span></a></li>
+    </ul>
+    <div class="fine"><span>© midee</span><span>Made for Ableton Live&nbsp;12 Suite</span></div>
+  </footer>
+</div>
+
+<script>
+/* ============================================================
+   Free projects. Edit this list to add or change projects.
+   status: "live" shows the button; anything else shows "Coming soon".
+   kind:   "zip"   → download_url is a direct file
+           "midee" → download_url opens the free project on midee.me
+   Leave download_url "" until there is a real public link.
+   ============================================================ */
+const PROJECTS = [
+  {
+    id: "amber",
+    title: "Amber",
+    artist_or_style: "midee composition · Techno",
+    technique: "Ten parts of a techno track, each on its own MIDI track. Mute, solo and change any part to see how the track is built.",
+    inside: "10 MIDI tracks: kick, drums, percussion, low bass, acid bass, chords, pluck, acid lead, vox and FX. Wavetable, Analog, Simpler and Drum Racks, samples included.",
+    download_url: "https://firstproduction.midee.me/demo/Amber-midee-demo.zip",
+    video_url: "",
+    status: "live",
+    kind: "zip",
+    size: "1.8 MB"
+  },
+  {
+    id: "hardhouse",
+    title: "Hard House",
+    artist_or_style: "Boiler Room style",
+    technique: "Kick, breaks, piano chords, two basslines and a vocal. Every sound is made with Ableton stock devices.",
+    inside: "10 parts: kick, three drum Racks, two pianos, low and mid bass, two vocal Racks.",
+    download_url: "https://midee.me/p/SgrYLtF",
+    video_url: "https://youtu.be/9Y5cLfYuErw",
+    status: "live",
+    kind: "midee"
+  },
+  {
+    id: "hardgroove",
+    title: "Hardgroove drums",
+    artist_or_style: "Groove formula 2 · Hardgroove techno",
+    technique: "A modern hardgroove pattern on the 909 Core Kit, with an FX processing Rack.",
+    inside: "5 parts: kick, two drum Racks, shakers and a low bass on Operator.",
+    download_url: "https://midee.me/p/fF1UqFe",
+    video_url: "https://youtu.be/fwEMxT0H-SQ",
+    status: "live",
+    kind: "midee"
+  },
+  {
+    id: "acid",
+    title: "303 Acid",
+    artist_or_style: "Electro, techno and trance",
+    technique: "The classic TB-303 acid line: MIDI and sound design built from scratch.",
+    inside: "15 parts: acid basses and synths on Operator and Wavetable, kicks and drum Racks.",
+    download_url: "https://midee.me/p/5Swyink",
+    video_url: "https://youtu.be/efoy9wm6Y5U",
+    status: "live",
+    kind: "midee"
+  },
+  {
+    id: "electro",
+    title: "Electro drums",
+    artist_or_style: "Groove formula 1 · Electro",
+    technique: "A classic electro pattern on the 808 Core Kit, with an FX processing Rack.",
+    inside: "2 parts: an 808 kick and an 808 drum Rack.",
+    download_url: "https://midee.me/p/H6Grf31",
+    video_url: "https://youtu.be/T3_NXuKLcgs",
+    status: "live",
+    kind: "midee"
+  },
+  {
+    id: "ukg",
+    title: "UK Garage",
+    artist_or_style: "UKG groove",
+    technique: "Swing, shuffled hats, a punchy kick and snappy snares.",
+    inside: "5 parts: kick, two drum Racks, bass and a rising pad.",
+    download_url: "https://midee.me/p/t9KmP6y",
+    video_url: "https://youtu.be/nEUFmk-Mw9k",
+    status: "live",
+    kind: "midee"
+  },
+  {
+    id: "jan26",
+    title: "Grooves of January ’26",
+    artist_or_style: "House, electro, hardgroove",
+    technique: "Drum parts and basslines you can bend to your own style, then layer with synths and vocals.",
+    inside: "11 parts: kicks, drum Racks, percussion and basslines on Operator and Analog.",
+    download_url: "https://midee.me/p/tmLG2qX",
+    video_url: "https://youtu.be/di677rlA_wQ",
+    status: "live",
+    kind: "midee"
+  },
+  {
+    id: "idea-to-release",
+    title: "From idea to release, ep. 1",
+    artist_or_style: "Practice session · Full track",
+    technique: "A track built from start to finish, so you can follow along and finish your own.",
+    inside: "10 parts: kick, drums, percussion, bass, chords, pads, pluck, lead and vox.",
+    download_url: "https://midee.me/p/LQWRWGs",
+    video_url: "https://youtu.be/kk4zC36pQf8",
+    status: "live",
+    kind: "midee"
+  },
+  {
+    id: "whiterose",
+    title: "White Rose",
+    artist_or_style: "Ignez · Low End breakdown",
+    technique: "Kick, rumble and toms hold the low end, with the toms working as the bass.",
+    inside: "4 Racks.",
+    download_url: "",
+    video_url: "https://youtu.be/oB7ddSp2Gic",
+    status: "pending Julie",
+    kind: "zip"
+  },
+  {
+    id: "thecall06",
+    title: "The Call 06",
+    artist_or_style: "Dave Alyan · Low End breakdown",
+    technique: "Kick and sub bass working as one sound.",
+    inside: "9 Racks.",
+    download_url: "",
+    video_url: "https://youtu.be/Won5hNeq7qU",
+    status: "pending Julie",
+    kind: "zip"
+  }
+];
+
+/* ============================================================
+   Roles. #school / #teacher / #producer in the URL selects one.
+   ============================================================ */
+const WA = "https://wa.me/34607414417?text=";
+const ROLES = {
+  school: {
+    title: "For music schools",
+    problem: "Students install Ableton and stare at an empty set. Day one turns into a manual.",
+    answer: "midee adds one step after the licence. Students open a full Ableton project with real sounds and take it apart.",
+    ticks: [
+      "Faster onboarding into Ableton Live\u00a012",
+      "Lessons built on breakdowns of real tracks",
+      "Students keep practising between classes",
+      "A free pilot for one class or cohort"
+    ],
+    ctas: [
+      { label: "Meet me at ADE, 22–25 Oct", href: WA + encodeURIComponent("Hi Julie, I'm from [school name], let's meet at ADE"), main: true, ext: true },
+      { label: "Email me", href: "mailto:js@midee.me?subject=" + encodeURIComponent("midee for schools") }
+    ]
+  },
+  teacher: {
+    title: "For Ableton teachers",
+    problem: "A technique is easier to teach when students can open it in Ableton and play with it.",
+    answer: "midee gives you ready projects and Racks with full settings inside, built from breakdowns of real tracks.",
+    ticks: [
+      "Ready projects and Racks to show techniques in your lessons",
+      "Homework your students can open in Ableton",
+      "Free teacher access for the pilot"
+    ],
+    ctas: [
+      { label: "Meet me at ADE, 22–25 Oct", href: WA + encodeURIComponent("Hi Julie, I teach Ableton, let's meet at ADE"), main: true, ext: true },
+      { label: "Email me", href: "mailto:js@midee.me?subject=" + encodeURIComponent("midee for teachers") }
+    ]
+  },
+  producer: {
+    title: "For producers",
+    problem: "Start your next session with a sound you already love.",
+    answer: "Take a free project, open it in Ableton and see how it is built. Then make it your own.",
+    ticks: [
+      "A free Ableton project with MIDI and Racks",
+      "The full library to try in your browser",
+      "Your first techno track, built part by part in the club"
+    ],
+    ctas: [
+      { label: "Download the free project", href: PROJECTS[0].download_url, main: true },
+      { label: "Try it in your browser", midee: "https://midee.me/p/default", ext: true }
+    ]
+  }
+};
+
+// ?s=<school-slug> comes from links in outreach emails; the QR on the card has no ?s
+const SRC = (new URLSearchParams(location.search).get("s") || "").toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+const UTM = SRC
+  ? { utm_source: "school_" + SRC, utm_medium: "email", utm_campaign: "ade2026" }
+  : { utm_source: "card", utm_medium: "qr", utm_campaign: "ade2026" };
+let role = null;           // null = nobody chose yet (producer content is shown)
+let current = PROJECTS[0].id;
+
+const $ = (s, el = document) => el.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+function withUtm(url) {
+  try {
+    const u = new URL(url);
+    for (const [k, v] of Object.entries(UTM)) u.searchParams.set(k, v);
+    if (role) u.searchParams.set("utm_content", role); else u.searchParams.delete("utm_content");
+    return u.toString();
+  } catch { return url; }
+}
+// every outbound midee link carries data-midee with its clean URL
+function refreshLinks() {
+  document.querySelectorAll("[data-midee]").forEach((a) => {
+    a.href = withUtm(a.dataset.midee);
+    if (!a.target) { a.target = "_blank"; a.rel = "noopener"; }
+  });
+}
+
+function renderRole() {
+  const key = role || "producer";
+  const r = ROLES[key];
+  document.querySelectorAll(".seg button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.role === role)));
+  const panel = $("#rolePanel");
+  panel.innerHTML = `
+    <div class="role-grid">
+      <div>
+        <h3>${esc(r.title)}</h3>
+        <p class="problem">${esc(r.problem)}</p>
+        <p class="answer">${esc(r.answer)}</p>
+      </div>
+      <div>
+        <ul class="ticks">${r.ticks.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
+        <div class="btns">${r.ctas.map((c) => {
+          const attrs = c.midee ? `href="#" data-midee="${esc(c.midee)}"` : `href="${esc(c.href)}"${c.ext ? ' target="_blank" rel="noopener"' : ""}`;
+          return `<a class="btn${c.main ? " btn--main" : ""}" ${attrs}>${esc(c.label)}</a>`;
+        }).join("")}</div>
+      </div>
+    </div>`;
+  refreshLinks();
+}
+
+function renderChips() {
+  $("#chips").innerHTML = PROJECTS.map((p) => {
+    const live = p.status === "live" && p.download_url;
+    return `<button type="button" class="chip" role="tab" id="chip-${esc(p.id)}" data-id="${esc(p.id)}" aria-selected="${p.id === current}" aria-controls="project">${esc(p.title)}${live ? "" : '<span class="soon">soon</span>'}</button>`;
+  }).join("");
+}
+
+function renderProject() {
+  const p = PROJECTS.find((x) => x.id === current) || PROJECTS[0];
+  const live = p.status === "live" && !!p.download_url;
+  let main;
+  if (!live) {
+    main = `<a class="btn btn--main" aria-disabled="true" role="link" tabindex="-1">Coming soon</a>`;
+  } else if (p.kind === "zip") {
+    main = `<a class="btn btn--main" href="${esc(p.download_url)}" download>Download project${p.size ? ` <small>.zip · ${esc(p.size)}</small>` : ""}</a>`;
+  } else {
+    main = `<a class="btn btn--main" href="#" data-midee="${esc(p.download_url)}">Open the free project</a>`;
+  }
+  const video = p.video_url ? `<a class="btn" href="${esc(p.video_url)}" target="_blank" rel="noopener">Watch the video</a>` : "";
+  const opens = !live
+    ? "This project is on its way. Watch the breakdown meanwhile."
+    : p.kind === "zip"
+      ? "Unzip it on your computer and double-click the .als file."
+      : "Opens on midee.me. Listen in the browser, or add the parts to Ableton with the midee plugin.";
+  $("#project").setAttribute("aria-labelledby", "chip-" + p.id);
+  $("#project").innerHTML = `
+    <div class="style">${esc(p.artist_or_style)}</div>
+    <h3>${esc(p.title)}</h3>
+    <p class="tech">${esc(p.technique)}</p>
+    <dl><dt>Inside</dt><dd>${esc(p.inside)}</dd></dl>
+    <div class="btns">${main}${video}</div>
+    <p class="opens">${esc(opens)}</p>
+    ${live ? `<button type="button" class="send" id="send">Send it to my laptop →</button>` : ""}`;
+  refreshLinks();
+  const send = $("#send");
+  if (send) send.onclick = () => sendToLaptop(p);
+}
+
+// on a phone the project is no use yet: share the link or mail it to yourself
+function sendToLaptop(p) {
+  const url = p.kind === "zip" ? p.download_url : withUtm(p.download_url);
+  const title = `midee · ${p.title} · free Ableton project`;
+  if (navigator.share) {
+    navigator.share({ title, text: title, url }).catch(() => {});
+  } else {
+    location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}`;
+  }
+}
+
+function setRole(next, push) {
+  role = ROLES[next] ? next : null;
+  if (push) history.replaceState(null, "", role ? "#" + role : location.pathname + location.search);
+  renderRole();
+}
+
+function readHash() {
+  const h = location.hash.replace("#", "").toLowerCase();
+  setRole(ROLES[h] ? h : null, false);
+}
+
+document.querySelector(".seg").addEventListener("click", (e) => {
+  const b = e.target.closest("button[data-role]");
+  if (b) setRole(b.dataset.role, true);
+});
+$("#chips").addEventListener("click", (e) => {
+  const b = e.target.closest(".chip");
+  if (!b) return;
+  current = b.dataset.id;
+  document.querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-selected", String(c === b)));
+  b.scrollIntoView({ block: "nearest", inline: "nearest" });
+  renderProject();
+});
+// keyboard: arrows move between project chips
+$("#chips").addEventListener("keydown", (e) => {
+  if (!["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp"].includes(e.key)) return;
+  const chips = [...document.querySelectorAll(".chip")];
+  const i = chips.findIndex((c) => c.dataset.id === current);
+  const n = chips[(i + (e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : -1) + chips.length) % chips.length];
+  e.preventDefault(); n.focus(); n.click();
+});
+// in-page jumps scroll without touching the role hash
+document.querySelectorAll("[data-scroll]").forEach((a) => a.addEventListener("click", (e) => {
+  e.preventDefault();
+  document.getElementById(a.dataset.scroll).scrollIntoView({ block: "start" });
+}));
+window.addEventListener("hashchange", readHash);
+
+// YouTube: load only on click
+$("#yt").addEventListener("click", function () {
+  const f = document.createElement("iframe");
+  f.src = "https://www.youtube-nocookie.com/embed/p1Ogt9wYXO8?autoplay=1&rel=0&modestbranding=1&playsinline=1";
+  f.title = "How to use the midee plugin";
+  f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+  f.allowFullscreen = true;
+  this.replaceWith(Object.assign(document.createElement("div"), { className: "yt" }));
+  document.querySelector(".video .yt").appendChild(f);
+});
+
+// plugin clips: play while on screen, never with reduced motion
+const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const clips = document.querySelectorAll(".step video");
+if (!still && "IntersectionObserver" in window) {
+  const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+    const v = en.target;
+    if (en.isIntersecting) { v.play().catch(() => {}); } else { v.pause(); }
+  }), { rootMargin: "120px 0px" });
+  clips.forEach((v) => io.observe(v));
+} else {
+  clips.forEach((v) => { v.controls = true; });
+}
+
+renderChips();
+renderProject();
+readHash();
+</script>
 </body>
 </html>

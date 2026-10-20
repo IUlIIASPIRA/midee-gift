@@ -237,6 +237,25 @@
     .reviews { columns: 3; }
     .steps { grid-template-columns: repeat(4, 1fr); gap: 16px; }
   }
+
+  /* project video preview */
+  .thumb { position: relative; display: block; margin: -6px 0 22px; border-radius: 14px; overflow: hidden; aspect-ratio: 16 / 9; background: #0e0e10; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease; }
+  .thumb:hover img { transform: scale(1.02); }
+  .thumb .play { position: absolute; left: 50%; top: 50%; width: 58px; height: 58px; margin: -29px 0 0 -29px; border-radius: 50%; background: #151517cc; color: var(--lav); display: grid; place-items: center; font-size: 20px; padding-left: 4px; }
+  .thumb .ytlabel { position: absolute; left: 12px; bottom: 10px; width: auto; aspect-ratio: auto; overflow: visible; font-size: 12px; padding: 4px 9px; border-radius: 99px; background: #151517cc; color: var(--text-85); }
+  /* YouTube comments */
+  .yt-h { font-size: 20px; font-weight: 500; letter-spacing: -.4px; margin-top: 44px; }
+  .ytc { display: grid; gap: 12px; margin-top: 18px; }
+  .ytc article { background: var(--island); border-radius: 16px; padding: 16px 18px; display: grid; grid-template-columns: 36px 1fr; gap: 12px; }
+  .ytc .av { width: 36px; height: 36px; border-radius: 50%; background: #2a2a30; color: var(--lav); display: grid; place-items: center; font-weight: 500; font-size: 15px; }
+  .ytc .who { font-size: 13px; color: var(--muted); }
+  .ytc .txt { margin-top: 4px; color: var(--text-85); font-size: 15px; line-height: 1.45; }
+  .ytc .src { display: inline-block; margin-top: 8px; font-size: 12px; color: var(--faint); }
+  .ytc .src:hover { color: var(--lav); }
+  .more-yt { display: inline-block; margin-top: 16px; color: var(--muted); font-size: 15px; }
+  .more-yt:hover { color: var(--lav); }
+  @media (min-width: 900px) { .ytc { grid-template-columns: 1fr 1fr; } }
 </style>
 </head>
 <body>
@@ -341,6 +360,10 @@
       <figure><img src="assets/review-production-upgrade.webp" width="640" height="136" decoding="async" alt="“Thanks you so much! My production upgrade directly with your tools”"></figure>
     </div>
     <p class="swipe-hint">Swipe →</p>
+
+    <h3 class="yt-h" id="yt-h">Comments on YouTube</h3>
+    <div class="ytc" id="ytc" aria-labelledby="yt-h"></div>
+    <a class="more-yt" href="https://youtube.com/@midee_me" target="_blank" rel="noopener">All videos on YouTube →</a>
   </section>
 
   <!-- 6. Club -->
@@ -607,6 +630,11 @@ function renderChips() {
   }).join("");
 }
 
+function ytIdOf(u) {
+  const m = /(?:youtu\.be\/|[?&]v=)([\w-]{11})/.exec(u || "");
+  return m ? m[1] : "";
+}
+
 function renderProject() {
   const p = PROJECTS.find((x) => x.id === current) || PROJECTS[0];
   const live = p.status === "live" && !!p.download_url;
@@ -618,7 +646,9 @@ function renderProject() {
   } else {
     main = `<a class="btn btn--main" href="#" data-midee="${esc(p.download_url)}">Open the free project</a>`;
   }
-  const video = p.video_url ? `<a class="btn" href="${esc(p.video_url)}" target="_blank" rel="noopener">Watch the video</a>` : "";
+  const ytId = ytIdOf(p.video_url);
+  const thumb = ytId ? `<a class="thumb" href="${esc(p.video_url)}" target="_blank" rel="noopener" aria-label="Watch the video on YouTube"><img src="assets/yt/${esc(ytId)}.webp" width="640" height="360" alt="" decoding="async"><span class="play" aria-hidden="true">▶</span><span class="ytlabel">Watch on YouTube</span></a>` : "";
+  const video = p.video_url && !ytId ? `<a class="btn" href="${esc(p.video_url)}" target="_blank" rel="noopener">Watch the video</a>` : "";
   const opens = !live
     ? "This project is on its way. Watch the breakdown meanwhile."
     : p.kind === "zip"
@@ -626,6 +656,7 @@ function renderProject() {
       : "Opens on midee.me. Listen in the browser, or add the parts to Ableton with the midee plugin.";
   $("#project").setAttribute("aria-labelledby", "chip-" + p.id);
   $("#project").innerHTML = `
+    ${thumb}
     <div class="style">${esc(p.artist_or_style)}</div>
     <h3>${esc(p.title)}</h3>
     <p class="tech">${esc(p.technique)}</p>
@@ -731,6 +762,34 @@ readHash();
   const box = el.parentElement;
   box.style.cursor = "pointer";
   box.addEventListener("click", () => { box.classList.remove("hop"); void box.offsetWidth; box.classList.add("hop"); });
+})();
+</script>
+
+<script>
+/* YouTube comments from viewers of the midee channel. Each one links to the original comment.
+   To add one: copy a line, paste the handle, the text as written, the video id and the comment id (from the comment's "lc=" link). */
+const YT_COMMENTS = [
+  { who: "@johnwomersley7992", text: "Awesome video. As someone new to music production and ableton, I really like the way you demonstrated the whole process", video: "9Y5cLfYuErw", title: "Hard House", lc: "UgwM-5jmXEJhVJNxGQ94AaABAg" },
+  { who: "@jarretvank", text: "I found this really informative and I loved how you explained both the how and the why of making all these subtle edits\u2026", video: "CpTz3QHtpeQ", title: "Arrangement", lc: "UgwU4oRfF2TWDTNnuM54AaABAg" },
+  { who: "@propheticrain-maker1486", text: "I just started using Ableton to make music and you\u2019ve shown me a much easier way of working on drums\u2026", video: "nEUFmk-Mw9k", title: "UK Garage drums", lc: "UgzRb18m0jIc4L1XzId4AaABAg" },
+  { who: "@Paddywhatlike", text: "\u2026This is genuinely one of the best tutorials I\u2019ve ever watched.. might even be THE best, it\u2019s so frickkn straightforward and broken down so simple. Thank you!", video: "9Y5cLfYuErw", title: "Hard House", lc: "Ugwn1f_C2D-pLnbCFNF4AaABAg" },
+  { who: "@wapbamboogie7213", text: "Excellent video and format, and giving away the project file is \ud83c\udf89", video: "efoy9wm6Y5U", title: "303 Acid", lc: "UgwvH8TpoYaIq7j9rDN4AaABAg" },
+  { who: "@coldsnap.p8089", text: "Thank you for such a short yet informative video\ud83d\udc4f\ud83d\udc4f", video: "fwEMxT0H-SQ", title: "Hardgroove drums", lc: "UgxBks_Osjp2mGTKnUt4AaABAg" },
+  { who: "@pat9376", text: "Very nice video series! I love the style of your videos, your voice is very calming and the advice is great :)", video: "z51fJqnOGZ0", title: "Automation", lc: "UgwAmaPwug2iYsEt34N4AaABAg" },
+  { who: "@EthenBassOfficial", text: "Amazing Abelton tutorial. The website is absolute precise with stock abelton chains and much more.", video: "kk4zC36pQf8", title: "Stop getting stuck", lc: "UgwvbQraGXmmXIyDMLd4AaABAg" }
+];
+(() => {
+  const box = document.getElementById("ytc"); if (!box) return;
+  const e = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  box.innerHTML = YT_COMMENTS.map((c) => `
+    <article>
+      <span class="av" aria-hidden="true">${e(c.who.replace("@", "").charAt(0).toUpperCase())}</span>
+      <div>
+        <div class="who">${e(c.who)}</div>
+        <p class="txt">${e(c.text)}</p>
+        <a class="src" href="https://www.youtube.com/watch?v=${e(c.video)}&lc=${e(c.lc)}" target="_blank" rel="noopener">on \u201c${e(c.title)}\u201d \u00b7 YouTube</a>
+      </div>
+    </article>`).join("");
 })();
 </script>
 </body>

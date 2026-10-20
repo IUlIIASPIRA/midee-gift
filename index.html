@@ -85,6 +85,9 @@
 
   /* hero */
   .hero { padding: 64px 0 8px; }
+  .kao { font-size: 22px; color: var(--lav); margin-bottom: 18px; white-space: pre; display: inline-block; transform-origin: 50% 100%; }
+  .kao.hop { animation: kaoHop .5s ease-out; }
+  @keyframes kaoHop { 0% { transform: translateY(0); } 35% { transform: translateY(-6px) rotate(-3deg); } 70% { transform: translateY(0) rotate(2deg); } 100% { transform: none; } }
   .hero h1 { font-size: 44px; font-weight: 500; letter-spacing: -1.6px; line-height: 1.04; max-width: 10em; }
   .hero .hook { color: var(--lav); font-size: 19px; margin-top: 18px; max-width: 22em; }
   .hero .racks { color: var(--muted); margin-top: 28px; font-size: 15px; max-width: 24em; }
@@ -246,6 +249,7 @@
 
   <!-- 1. Hero -->
   <div class="hero">
+    <p class="kao" aria-hidden="true"><span id="kao">☆( ^.^)ノ</span></p>
     <h1>Your gift for Ableton Live</h1>
     <p class="hook">Open Ableton with a sound you already love.</p>
     <div class="btns">
@@ -363,9 +367,7 @@
     </div>
     <p class="ade">At ADE Amsterdam 22–25 Oct 2026. Say hi <span aria-hidden="true">👉🏻👈🏻</span></p>
     <ul class="contacts">
-      <li><a href="https://wa.me/34607414417" target="_blank" rel="noopener"><span>WhatsApp</span><span>+34 607 414 417</span></a></li>
-      <li><a href="https://t.me/+34607414417" target="_blank" rel="noopener"><span>Telegram</span><span>+34 607 414 417</span></a></li>
-      <li><a href="mailto:js@midee.me"><span>Email</span><span>js@midee.me</span></a></li>
+      <li><a href="mailto:hello@midee.me"><span>Email</span><span>hello@midee.me</span></a></li>
       <li><a href="https://instagram.com/spiraaaaaa" target="_blank" rel="noopener"><span>Instagram</span><span>@spiraaaaaa</span></a></li>
       <li><a href="https://youtube.com/@midee_me" target="_blank" rel="noopener"><span>YouTube</span><span>@midee_me</span></a></li>
       <li><a href="https://t.me/Ableton_trainer_bot" target="_blank" rel="noopener"><span>Ableton Trainer bot</span><span>Telegram</span></a></li>
@@ -500,7 +502,8 @@ const PROJECTS = [
 /* ============================================================
    Roles. #school / #teacher / #producer in the URL selects one.
    ============================================================ */
-const WA = "https://wa.me/34607414417?text=";
+const MAIL = (subject, body) => "mailto:hello@midee.me?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+const IG_DM = "https://ig.me/m/spiraaaaaa";
 const ROLES = {
   school: {
     title: "For music schools",
@@ -513,8 +516,8 @@ const ROLES = {
       "A free pilot for one class or cohort"
     ],
     ctas: [
-      { label: "Meet me at ADE, 22–25 Oct", href: WA + encodeURIComponent("Hi Julie, I'm from [school name], let's meet at ADE"), main: true, ext: true },
-      { label: "Email me", href: "mailto:js@midee.me?subject=" + encodeURIComponent("midee for schools") }
+      { label: "Meet me at ADE, 22–25 Oct", href: MAIL("midee for schools: let's meet at ADE", "Hi Julie,\n\nI'm from [school name]. Let's meet at ADE.\n"), main: true },
+      { label: "Message me on Instagram", href: IG_DM, ext: true }
     ]
   },
   teacher: {
@@ -527,8 +530,8 @@ const ROLES = {
       "Free teacher access for the pilot"
     ],
     ctas: [
-      { label: "Meet me at ADE, 22–25 Oct", href: WA + encodeURIComponent("Hi Julie, I teach Ableton, let's meet at ADE"), main: true, ext: true },
-      { label: "Email me", href: "mailto:js@midee.me?subject=" + encodeURIComponent("midee for teachers") }
+      { label: "Meet me at ADE, 22–25 Oct", href: MAIL("midee for teachers: let's meet at ADE", "Hi Julie,\n\nI teach Ableton. Let's meet at ADE.\n"), main: true },
+      { label: "Message me on Instagram", href: IG_DM, ext: true }
     ]
   },
   producer: {
@@ -711,6 +714,24 @@ if (!still && "IntersectionObserver" in window) {
 renderChips();
 renderProject();
 readHash();
+</script>
+<script>
+/* Kaomoji in the hero: waves, blinks now and then, hops on tap. Static if the visitor asked for less motion. */
+(() => {
+  const el = document.getElementById("kao"); if (!el) return;
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const wave = ["☆( ^.^)ノ", "☆( ^.^)/", "☆( ^.^)ノ", "☆( ^.^)/"];
+  const blink = "☆( -.-)ノ";
+  let i = 0, t = 0;
+  setInterval(() => {
+    t++;
+    if (t % 9 === 0) { el.textContent = blink; return; }
+    el.textContent = wave[i++ % wave.length];
+  }, 420);
+  const box = el.parentElement;
+  box.style.cursor = "pointer";
+  box.addEventListener("click", () => { box.classList.remove("hop"); void box.offsetWidth; box.classList.add("hop"); });
+})();
 </script>
 </body>
 </html>

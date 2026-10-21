@@ -320,6 +320,8 @@
   @media (min-width: 1040px) {
     .reviews { columns: 3; }
     .steps { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    /* the install video is as wide as two step cards (Julie, 21.10: "большая") */
+    .video { max-width: calc((100% - 16px) / 2); }
   }
 
   /* "what next" sheet after Get this project */
@@ -335,6 +337,10 @@
   dialog.next .small { margin-top: 12px; font-size: 13px; color: var(--muted); }
   .phone-only { display: none; }
   @media (hover: none) and (pointer: coarse) { .phone-only { display: flex; } .desk-only { display: none; } }
+  /* "press me" ring on Get this project after Take your gift */
+  .btn.nudge { animation: nudgeRing .9s ease-out 3; }
+  @keyframes nudgeRing { 0% { box-shadow: 0 0 0 0 #c4b5fdcc; } 100% { box-shadow: 0 0 0 16px #c4b5fd00; } }
+  @media (prefers-reduced-motion: reduce) { .btn.nudge { animation: none; outline: 3px solid var(--lav); outline-offset: 4px; } }
 </style>
 </head>
 <body>
@@ -693,8 +699,29 @@ function refreshLinks() {
 function bindScroll(root) {
   root.querySelectorAll("[data-scroll]").forEach((a) => a.addEventListener("click", (e) => {
     e.preventDefault();
+    if (a.dataset.scroll === "take") { goToGift(); return; }
     document.getElementById(a.dataset.scroll).scrollIntoView({ block: "start" });
   }));
+}
+// "Take your gift": open Hard House and land on its button, then point at it
+function goToGift() {
+  if (current !== "hardhouse") document.getElementById("chip-hardhouse").click();
+  setTimeout(() => {
+    const btn = $("#openProj"), hint = btn.closest(".btns").nextElementSibling;
+    const roll = $("#project .roll-slot").getBoundingClientRect();
+    const end = (hint || btn).getBoundingClientRect().bottom + 24;
+    // show as much of the card as fits, but always the button and the hint under it
+    const top = scrollY + Math.max(roll.top - 16, end - innerHeight);
+    window.scrollTo({ top, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    let done = false;
+    const nudge = () => {
+      if (done) return; done = true;
+      btn.classList.remove("nudge"); void btn.offsetWidth; btn.classList.add("nudge");
+      setTimeout(() => btn.classList.remove("nudge"), 3000);
+    };
+    if ("onscrollend" in window) addEventListener("scrollend", nudge, { once: true });
+    setTimeout(nudge, 1000);
+  }, current === "hardhouse" ? 0 : 120);
 }
 
 function renderRole() {

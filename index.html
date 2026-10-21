@@ -99,7 +99,8 @@
   /* top bar */
   .top { display: flex; justify-content: space-between; align-items: baseline; padding: 24px 8px 0; }
   .wordmark { font-family: var(--wordmark); font-weight: 500; font-size: 24px; letter-spacing: -.3px; color: var(--lav); text-decoration: none; line-height: 1; }
-  .top .when { font-size: 14px; color: var(--text-85); }
+  .top .when { font-size: 13px; color: var(--text-85); border: 1px solid #c4b5fd55; background: #151517b3; border-radius: 99px; padding: 6px 12px; letter-spacing: .02em; }
+  .top .when b { color: var(--lav); font-weight: 700; letter-spacing: .08em; margin-right: 2px; }
 
   /* hero: sits straight on the club, a soft dark scrim keeps the text readable */
   .hero { position: relative; padding: 64px 8px 36px; }
@@ -109,7 +110,7 @@
   .kao.hop { animation: kaoHop .5s ease-out; }
   @keyframes kaoHop { 0% { transform: translateY(0); } 35% { transform: translateY(-6px) rotate(-3deg); } 70% { transform: translateY(0) rotate(2deg); } 100% { transform: none; } }
   .hero h1 { font-size: 44px; font-weight: 500; letter-spacing: -1.6px; line-height: 1.04; max-width: 10em; }
-  .hero .hook { color: var(--lav); font-size: 19px; margin-top: 18px; max-width: 22em; }
+  .hero .hook { color: var(--lav); font-size: 19px; margin-top: 18px; max-width: 22em; text-wrap: balance; }
   .hero .racks { color: var(--text-85); margin-top: 26px; font-size: 15px; max-width: 26em; }
   .hero .racks b { color: var(--text); font-weight: 500; }
   .hero .btns { max-width: 380px; }
@@ -317,6 +318,20 @@
     .reviews { columns: 3; }
     .steps { grid-template-columns: repeat(4, 1fr); gap: 16px; }
   }
+
+  /* "what next" sheet after Get this project */
+  dialog.next { width: min(560px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); overflow: auto; margin: auto; padding: 26px 22px 22px; border: 1px solid #c4b5fd44; border-radius: 22px; background: #1c1c20; color: var(--text); box-shadow: 0 30px 80px #000c; }
+  dialog.next::backdrop { background: #0b0b0dcc; backdrop-filter: blur(4px); }
+  dialog.next h2 { font-size: 24px; font-weight: 500; letter-spacing: -.6px; line-height: 1.15; margin-top: 4px; padding-right: 30px; }
+  dialog.next .x { position: absolute; top: 12px; right: 14px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: #2a2a30; color: var(--text); font-size: 22px; cursor: pointer; }
+  .next-vid { margin: 18px 0 0; border-radius: 14px; overflow: hidden; background: #000; }
+  .next-vid video { width: 100%; height: auto; display: block; aspect-ratio: 720 / 786; max-height: 46dvh; object-fit: cover; object-position: top; }
+  .next-steps { margin: 18px 0 0; padding-left: 20px; display: grid; gap: 10px; color: var(--text-85); font-size: 15px; line-height: 1.45; }
+  .next-steps b { color: var(--text); font-weight: 500; }
+  dialog.next .btns { margin-top: 18px; }
+  dialog.next .small { margin-top: 12px; font-size: 13px; color: var(--muted); }
+  .phone-only { display: none; }
+  @media (hover: none) and (pointer: coarse) { .phone-only { display: flex; } .desk-only { display: none; } }
 </style>
 </head>
 <body>
@@ -326,19 +341,19 @@
 <div class="wrap">
   <header class="top">
     <a class="wordmark" href="#" data-midee="https://midee.me/" aria-label="midee home">midee</a>
-    <span class="when">ADE Amsterdam · 22–25 Oct</span>
+    <span class="when"><b>ADE</b> Amsterdam · 22–25 Oct</span>
   </header>
 
   <!-- 1. Hero -->
   <div class="hero">
     <p class="kao" aria-hidden="true"><span id="kao">☆( ^.^)ノ</span></p>
     <h1>Your gift for Ableton Live</h1>
-    <p class="hook">Open Ableton with a sound you already love.</p>
+    <p class="hook">Open Ableton with a sound you already love</p>
     <div class="btns">
       <a class="btn btn--main btn--gift" href="#take" data-scroll="take"><span class="gift-ico" aria-hidden="true">🎁</span> Take your gift ↓</a>
       <a class="btn" href="#plugin" data-scroll="plugin">Try it as a plugin in Ableton</a>
     </div>
-    <p class="racks"><b>7,000+ Racks</b> with full settings inside, as a plugin in Ableton and in your browser.</p>
+    <p class="racks"><b>7,000+ Racks</b> with full settings inside, as a plugin in Ableton and in your browser</p>
   </div>
 
   <!-- 2. Who are you -->
@@ -424,7 +439,7 @@
       <div class="step"><figure><video muted loop playsinline preload="none" poster="assets/step1-install.webp" aria-label="Installing the midee plugin"><source src="assets/step1-install.webm" type="video/webm"><source src="assets/step1-install.mp4" type="video/mp4"></video></figure><figcaption><b>1.</b> Install the plugin</figcaption></div>
       <div class="step"><figure><video muted loop playsinline preload="none" poster="assets/step2-rescan.webp" aria-label="Rescanning plug-ins in Ableton"><source src="assets/step2-rescan.webm" type="video/webm"><source src="assets/step2-rescan.mp4" type="video/mp4"></video></figure><figcaption><b>2.</b> Rescan plug-ins in Ableton</figcaption></div>
       <div class="step"><figure><video muted loop playsinline preload="none" poster="assets/step3-open.webp" aria-label="Opening midee inside Ableton"><source src="assets/step3-open.webm" type="video/webm"><source src="assets/step3-open.mp4" type="video/mp4"></video></figure><figcaption><b>3.</b> Open midee and log in</figcaption></div>
-      <div class="step"><figure><video muted loop playsinline preload="none" poster="assets/step4-drag.webp" aria-label="Dragging a sound onto an empty MIDI track"><source src="assets/step4-drag.webm" type="video/webm"><source src="assets/step4-drag.mp4" type="video/mp4"></video></figure><figcaption><b>4.</b> Drag a sound onto an empty MIDI track</figcaption></div>
+      <div class="step"><figure><video muted loop playsinline preload="none" poster="assets/drag-hq-poster.webp" aria-label="Dragging a sound from midee onto a MIDI track in Ableton"><source src="assets/drag-hq.mp4" type="video/mp4"></video></figure><figcaption><b>4.</b> Drag a sound onto an empty MIDI track</figcaption></div>
     </div>
 
     <div class="video">
@@ -722,7 +737,7 @@ function renderProject() {
     <p class="tech">${esc(p.technique)}</p>
     <div class="roll-slot"></div>
     <dl><dt>Inside</dt><dd>${esc(p.inside)}</dd></dl>
-    <div class="btns"><a class="btn btn--main" href="#" data-midee="${esc(p.download_url)}">Open the project in midee</a></div>
+    <div class="btns"><a class="btn btn--main" id="openProj" href="#" data-midee="${esc(p.download_url)}">Get this project →</a></div>
     <p class="hint">On midee, press <b>Export to Ableton</b> at the top right and sign up free. You get the project as an Ableton Live Set&nbsp;(.als).</p>
     <div class="row">
       <button type="button" class="send" id="send">Send it to my laptop →</button>
@@ -730,6 +745,7 @@ function renderProject() {
     </div>`;
   refreshLinks();
   $("#send").onclick = () => sendToLaptop(p);
+  $("#openProj").addEventListener("click", () => openNext(p));
   Roll.mount(card.querySelector(".roll-slot"), p.id);
 }
 
@@ -1045,6 +1061,41 @@ const YT_COMMENTS = [
         <a class="src" href="https://www.youtube.com/watch?v=${e(c.video)}&lc=${e(c.lc)}" target="_blank" rel="noopener">on “${e(c.title)}” · YouTube</a>
       </div>
     </article>`).join("");
+})();
+</script>
+
+<dialog class="next" id="next" aria-labelledby="next-h">
+  <button class="x" type="button" id="nextClose" aria-label="Close">×</button>
+  <p class="label">Your gift</p>
+  <h2 id="next-h"><span id="nextTitle">The project</span> is opening in midee</h2>
+  <figure class="next-vid"><video id="nextVid" muted loop playsinline preload="none" poster="assets/drag-hq-poster.webp" aria-label="Dragging a sound from midee onto a MIDI track in Ableton"><source src="assets/drag-hq.mp4" type="video/mp4"></video></figure>
+  <ol class="next-steps">
+    <li><b>Whole project:</b> on midee press <b>Export to Ableton</b> at the top right and sign up free. You get an Ableton Live Set (.als)</li>
+    <li><b>Part by part:</b> install the midee plugin and drag any part straight onto a MIDI track in Ableton</li>
+  </ol>
+  <div class="btns desk-only">
+    <a class="btn btn--main" href="https://plugin.midee.me/download/mac">Plugin for Mac</a>
+    <a class="btn" href="https://plugin.midee.me/download/win">Plugin for Windows</a>
+  </div>
+  <div class="btns phone-only">
+    <button type="button" class="btn btn--main" id="nextSend">Send it to my laptop →</button>
+  </div>
+  <p class="small">The plugin is VST3 for Ableton Live on Mac and Windows. You log in once inside the plugin</p>
+</dialog>
+<script>
+function openNext(p) {
+  const d = document.getElementById("next"); if (!d) return;
+  document.getElementById("nextTitle").textContent = p.title;
+  document.getElementById("nextSend").onclick = () => sendToLaptop(p);
+  if (d.showModal) d.showModal(); else d.setAttribute("open", "");
+  const v = document.getElementById("nextVid");
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) { v.play().catch(() => {}); }
+}
+(() => {
+  const d = document.getElementById("next"); if (!d) return;
+  const close = () => { d.close ? d.close() : d.removeAttribute("open"); document.getElementById("nextVid").pause(); };
+  document.getElementById("nextClose").onclick = close;
+  d.addEventListener("click", (e) => { if (e.target === d) close(); });
 })();
 </script>
 </body>

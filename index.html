@@ -183,7 +183,10 @@
   .roll__top { display: flex; align-items: center; gap: 10px; }
   .roll__play { position: relative; flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--peach); }
   .roll__play::before { content: ""; position: absolute; top: 50%; left: 54%; transform: translate(-50%, -50%); border-style: solid; border-width: 6px 0 6px 10px; border-color: transparent transparent transparent #151517; }
-  .roll__play[aria-pressed="true"]::before { left: 50%; width: 10px; height: 12px; border: 0; border-left: 3px solid #151517; border-right: 3px solid #151517; }
+  .roll__play[aria-pressed="true"]::before { top: 37%; left: 50%; width: 12px; height: 7px; border: 0; border-left: 3px solid #151517; border-right: 3px solid #151517; border-radius: 1px; }
+  .roll__play[aria-pressed="true"]::after { content: ""; position: absolute; top: 66%; left: 50%; transform: translate(-50%, -50%); width: 16px; height: 5px; border: 2px solid #151517; border-top: 0; border-radius: 0 0 12px 12px / 0 0 7px 7px; animation: smileBob 1.2s ease-in-out infinite; }
+  @keyframes smileBob { 50% { transform: translate(-50%, -35%); } }
+  @media (prefers-reduced-motion: reduce) { .roll__play[aria-pressed="true"]::after { animation: none; } }
   .roll__play:focus-visible { outline-color: var(--peach); }
   .roll__title { font-size: 14px; font-weight: 600; color: #edececf2; }
   .roll__time { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--faint); }
